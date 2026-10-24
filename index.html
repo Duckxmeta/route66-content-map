@@ -42,19 +42,20 @@
     <div id="map"></div>
     <div class="sidebar">
         <h1>🦆 Route 66 Content Map</h1>
-        <div class="subtitle">Must-film stops • Classic stays • Timing guide</div>
+        <div class="subtitle">Must-film stops • Date nights • Classic stays • 14-day pace</div>
         <div class="stats">
             <div class="stat"><strong>2,448</strong><span>Miles</span></div>
-            <div class="stat"><strong>14–21</strong><span>Days Ideal</span></div>
+            <div class="stat"><strong>14</strong><span>Days Target</span></div>
             <div class="stat"><strong>8</strong><span>States</span></div>
         </div>
         <div class="legend">
             <div class="legend-item"><div class="dot" style="background:#ff6b35"></div> Content Priority Stop</div>
+            <div class="legend-item"><div class="dot" style="background:#f472b6"></div> Date Night / Evening</div>
             <div class="legend-item"><div class="dot" style="background:#4ade80"></div> Great Classic Stay</div>
             <div class="legend-item"><div class="dot" style="background:#60a5fa"></div> Major City Hub</div>
         </div>
         <div class="content-tip">
-            <strong>Timing tip:</strong> Plan 300–400 miles/day max if filming. Golden hour + neon nights = best content. 14 days is rushed; 18–21 days lets you actually create.
+            <strong>14-day pace:</strong> ~175 miles/day average. Build evenings around neon, classic diners, sunsets, and the overnight stays. You’ll find more along the way — these are the easy wins.
         </div>
     </div>
 
@@ -79,30 +80,30 @@
 
         L.polyline(route, { color: '#ff6b35', weight: 3, opacity: 0.8, dashArray: '10, 6' }).addTo(map);
 
+        const colors = { content: '#ff6b35', date: '#f472b6', stay: '#4ade80', city: '#60a5fa' };
+
         const stops = [
-            { lat:41.8781, lng:-87.6298, name:"Chicago Begin Sign", type:"content", tag:"Photo Op", time:"Start", desc:"Classic first shot. Pair with Cloud Gate (The Bean) and Lou Mitchell’s breakfast for opening content." },
+            { lat:41.8781, lng:-87.6298, name:"Chicago Begin Sign", type:"content", tag:"Photo Op", time:"Day 1", desc:"Classic first shot. Pair with Cloud Gate (The Bean) and Lou Mitchell’s breakfast for opening content." },
             { lat:41.3078, lng:-88.1467, name:"Gemini Giant", type:"content", tag:"Muffler Man", time:"Day 1", desc:"30-ft spacesuit giant. Perfect for quirky roadside content and vertical video." },
             { lat:40.8814, lng:-88.6298, name:"Route 66 Hall of Fame", type:"content", tag:"Museum", time:"Day 1–2", desc:"Great interior shots of signs and cars. Easy B-roll." },
             { lat:38.7606, lng:-90.1764, name:"Chain of Rocks Bridge", type:"content", tag:"Iconic Bridge", time:"Day 2", desc:"Dramatic 22° bend. Walk/bike across for unique angles over the Mississippi." },
-            { lat:38.6247, lng:-90.1848, name:"Gateway Arch + Ted Drewes", type:"city", tag:"City Hub", time:"Day 2–3", desc:"Arch tram + Concrete milkshake. Strong urban-to-road transition content." },
-            { lat:38.0628, lng:-91.4032, name:"Wagon Wheel Motel", type:"stay", tag:"Classic Stay", time:"Night 3", desc:"Restored 1930s motor court. Film the rooms, neon, and morning coffee. Book ahead." },
-            { lat:37.2089, lng:-93.2923, name:"Springfield, MO", type:"city", tag:"Birthplace", time:"Day 4", desc:"Where Route 66 was named. Car museum + downtown for mid-route reset." },
+            { lat:38.6247, lng:-90.1848, name:"Gateway Arch + Ted Drewes", type:"date", tag:"Date Night", time:"Night 2", desc:"Arch at dusk + Ted Drewes frozen custard after dark. Easy, classic St. Louis evening." },
+            { lat:38.0628, lng:-91.4032, name:"Wagon Wheel Motel", type:"stay", tag:"Classic Stay", time:"Night 3", desc:"Restored 1930s motor court. Quiet night, good for early rest before longer Missouri days." },
+            { lat:37.2089, lng:-93.2923, name:"Springfield, MO", type:"city", tag:"Birthplace", time:"Day 4", desc:"Where Route 66 was named. Car museum + downtown for a mid-route reset." },
             { lat:37.0756, lng:-94.6394, name:"Cars on the Route (Galena)", type:"content", tag:"Pixar Tie-in", time:"Day 4", desc:"Kan-O-Tex station. Instant recognizable content for Cars fans." },
             { lat:36.1938, lng:-95.7329, name:"Blue Whale of Catoosa", type:"content", tag:"Roadside Icon", time:"Day 5", desc:"Climb inside the mouth. One of the most shareable stops on the entire route." },
-            { lat:36.1539, lng:-95.9928, name:"Tulsa", type:"city", tag:"City Hub", time:"Day 5–6", desc:"Cyrus Avery Plaza + Art Deco. Good base for Oklahoma content." },
-            { lat:35.4676, lng:-97.5164, name:"Pops 66 + OKC", type:"content", tag:"Photo Stop", time:"Day 6", desc:"Giant soda bottle + National Memorial. Bright, colorful daytime content." },
-            { lat:35.1872, lng:-101.9870, name:"Cadillac Ranch", type:"content", tag:"Must Film", time:"Day 7", desc:"Bring spray paint. Graffiti cars at golden hour or sunset = gold content." },
-            { lat:35.1717, lng:-103.7241, name:"Blue Swallow Motel", type:"stay", tag:"Legendary Stay", time:"Night 8", desc:"The neon. The garages. The 1950s vibe. Non-negotiable overnight for content." },
-            { lat:35.0844, lng:-106.6504, name:"Albuquerque", type:"city", tag:"City Hub", time:"Day 9", desc:"Old Town + Nob Hill neon. Strong New Mexico segment." },
+            { lat:36.1539, lng:-95.9928, name:"Tulsa Evening", type:"date", tag:"Date Night", time:"Night 5", desc:"Cyrus Avery Plaza by day, then downtown Tulsa or a classic diner. Good base for a relaxed evening." },
+            { lat:35.4676, lng:-97.5164, name:"Pops 66 (Night Lights)", type:"date", tag:"Date Night", time:"Night 6", desc:"Giant soda bottle lights up at night. Grab dinner nearby in OKC and circle back for the glow." },
+            { lat:35.1872, lng:-101.9870, name:"Cadillac Ranch Sunset", type:"date", tag:"Date Night", time:"Night 7", desc:"Spray-paint cars at golden hour into sunset. One of the best couple + content moments on the route." },
+            { lat:35.1717, lng:-103.7241, name:"Blue Swallow + Tucumcari Neon", type:"stay", tag:"Legendary Stay", time:"Night 8", desc:"Iconic neon, garages, and the whole Tucumcari neon strip after dark. Best overnight for romance + footage." },
+            { lat:35.0844, lng:-106.6504, name:"Albuquerque Nob Hill / 66 Diner", type:"date", tag:"Date Night", time:"Night 9", desc:"Walk Nob Hill, eat at 66 Diner or a classic Central Ave spot, then catch neon along the old route." },
             { lat:35.0235, lng:-110.6981, name:"Standin’ on the Corner", type:"content", tag:"Eagles", time:"Day 10", desc:"Mural + flatbed Ford + statue. Easy, high-engagement photo/video stop." },
-            { lat:34.9026, lng:-110.1688, name:"Wigwam Motel", type:"stay", tag:"Unique Stay", time:"Night 10", desc:"Sleep in a teepee. Vintage cars outside. Unmissable for vlogs." },
-            { lat:35.1983, lng:-111.6513, name:"Flagstaff", type:"city", tag:"City Hub", time:"Day 11", desc:"Good rest day. Historic downtown + Grand Canyon access if wanted." },
+            { lat:34.9026, lng:-110.1688, name:"Wigwam Motel Neon Night", type:"stay", tag:"Unique Stay", time:"Night 10", desc:"Sleep in a teepee. Vintage cars outside and the neon after dark make it an easy date-night win." },
+            { lat:35.1983, lng:-111.6513, name:"Flagstaff Downtown", type:"city", tag:"City Hub", time:"Day 11", desc:"Good rest day. Historic downtown has solid evening options if you want a sit-down dinner." },
             { lat:35.3256, lng:-112.8763, name:"Seligman", type:"content", tag:"Heart of 66", time:"Day 12", desc:"Murals, shops, pure Route 66 town energy. Easy walking content." },
-            { lat:34.5586, lng:-115.7439, name:"Roy’s Motel & Café (Amboy)", type:"content", tag:"Desert Icon", time:"Day 13–14", desc:"Googie neon in the Mojave. Arrive late afternoon for light. Pure cinematic stop." },
-            { lat:34.0195, lng:-118.4912, name:"Santa Monica End of the Trail", type:"content", tag:"Finish", time:"Final Day", desc:"Official end marker near the pier. Strong closing shot with the ocean." }
+            { lat:34.5586, lng:-115.7439, name:"Roy’s Neon Under the Stars", type:"date", tag:"Date Night", time:"Night 13", desc:"Arrive late afternoon. Googie neon against the Mojave night sky is pure cinematic date-night content." },
+            { lat:34.0195, lng:-118.4912, name:"Santa Monica Pier Sunset", type:"date", tag:"Finish", time:"Night 14", desc:"End of the Trail marker + pier sunset. Strong closing shot and a natural last date night of the trip." }
         ];
-
-        const colors = { content: '#ff6b35', stay: '#4ade80', city: '#60a5fa' };
 
         stops.forEach(s => {
             const m = L.circleMarker([s.lat, s.lng], {
